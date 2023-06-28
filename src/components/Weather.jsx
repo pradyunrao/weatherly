@@ -87,15 +87,11 @@ export default function Weather() {
   }
 
   React.useEffect(() => {
-
-
         navigator.geolocation.getCurrentPosition(async (position) =>{
           const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${Math.round(position.coords.latitude * 10) / 10}&lon=${Math.round(position.coords.longitude * 10) / 10}&appid=${API_KEY}&units=metric`)
 
           const data = await res.json()
           setCurrentWeather(data) 
-          console.log(data.weather[0].icon)
-          console.log(data)
 
         }, error)
         
@@ -106,8 +102,7 @@ export default function Weather() {
     try{
       const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`)
       const data = await response.json()
-      setCurrentWeather(data)
-                                         
+      setCurrentWeather(data)                                   
       setCity('')
       console.log(data)
     }catch(error){
@@ -119,6 +114,7 @@ export default function Weather() {
   
   return ( 
   <div className='container'>
+    <h1>Weatherly</h1>
     <form onSubmit={handleSubmit} className='inputForm'>
       <input
         type="search"
@@ -129,13 +125,13 @@ export default function Weather() {
       />
     </form> 
     <main>
-      <section className='main_info'>
-        <h3>{currentWeather?.name},{currentWeather?.sys?.country}</h3>
-        {currentWeather?.main ? <div className='tempDiv'>
-                                  <img src={getIcon(currentWeather?.weather[0].icon)}/>
-                                  {Math.round(currentWeather?.main?.temp)} &#8451; 
-                                  <p>{`feels like ${Math.round(currentWeather?.main?.feels_like)}`} &#8451;</p>
-                                </div> : ""}
+     {currentWeather?.cod == '200' ? <> <section className='main_info'>
+        <h2>{currentWeather?.name}, {currentWeather?.sys?.country}</h2>
+         <div className='tempDiv'>
+              <img src={getIcon(currentWeather?.weather[0].icon)}/>
+              <span>{Math.round(currentWeather?.main?.temp)} &#8451; </span>
+              <p>{`feels like ${Math.round(currentWeather?.main?.feels_like)}`} &#8451;</p>
+          </div> 
       </section>                          
        <div className='line_div'>{''}</div>
        <section className='side_info'>
@@ -145,7 +141,7 @@ export default function Weather() {
             <p>Humidity</p>
             <span>{currentWeather?.main?.humidity}%</span>
           </div>
-          </div>
+        </div>
         <div className="details">
           <img src={Wind}/> 
           <div>
@@ -160,7 +156,11 @@ export default function Weather() {
             <span>{currentWeather?.main?.pressure} hPa</span>
           </div>
         </div>   
-       </section>  
+       </section>
+       </>: currentWeather?.cod == '404' ? <main>
+                                             <h2>Place not found<br/>Enter a different city</h2>
+                                           </main> 
+                                         : <h1>Loading....</h1>}  
     </main>  
   </div>
   )

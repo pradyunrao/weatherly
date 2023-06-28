@@ -1,7 +1,9 @@
 #root {
-  --dark-blue: #1b4965;
+  --dark-blue: rgba(27, 72, 101, 0.6);
+  --placeholder-blue: rgba(27, 73, 101,0.9);
   --transparent-blue: rgba(175, 216, 250, 0.2);
-  --light-blue: rgb(216, 235, 251);
+  --light-blue: rgb(238, 245, 250);
+  --med-blue: rgb(164, 211, 249);
 }
 
 
@@ -18,7 +20,7 @@ main{
 }
 
 
-h3{
+h2{
   margin: 0;
 }
 
@@ -29,10 +31,20 @@ h3{
   align-items: center;
   justify-content: center;
   border-radius: 0.8rem;
-  background-color: var(--transparent-blue);
-  color: var(--dark-blue);
-  padding: 1rem;
-  width: 40rem;
+  border: 2px solid var(--light-blue);
+  background-color: var(--dark-blue);
+  color: var(--light-blue);
+  padding: 2rem;
+  width: 35rem;
+}
+
+.container h1{
+  margin: 0;
+  font-size: 3rem;
+}
+
+.container form{
+  margin-bottom: 1rem;
 }
 
 .main_info{
@@ -40,11 +52,11 @@ h3{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 50%;
 }
 
 .main_info img{
-  width: 10rem;
+  width: 8rem;
 }
 
 
@@ -53,15 +65,17 @@ h3{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 700;
 }
 
+
 .tempDiv p{
    margin: 0;
-   font-weight: 300;
    font-size: 1rem;
+   font-weight: 400;
 }
+
 
 .inputForm{
   width:60%;
@@ -79,13 +93,13 @@ h3{
 
 .inputSearch:focus,
 .inputSearch:focus-visible{
-  outline: 4px auto var(--dark-blue);
-  color: var(--dark-blue);
+  outline: 4px auto black;
+  color: black;
 
 }
 
 .inputSearch::placeholder{
-  color: var(--dark-blue)
+  color: var(--placeholder-blue)
 }
 
 
@@ -107,13 +121,14 @@ h3{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 60%;
+  width: 40%;
+  font-weight: 500;
 }
 
 .details{
   display: flex;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   width: 100%;
 }
 
@@ -127,6 +142,10 @@ h3{
   margin-right: 1rem;
 }
 
+.errorText{
+  display: block;
+}
+
 
 @media(max-width: 750px){
 
@@ -138,7 +157,7 @@ h3{
   }
 
   .container{
-    width: 20rem;
+    width: 80%;
   }
 
   .data{
@@ -146,7 +165,7 @@ h3{
   }
 
   .inputForm{
-    width:80%;
+    width:100%;
   }
  
   .line_div{
@@ -163,6 +182,10 @@ h3{
   .details{
     margin-bottom: 0.5rem;
     width: 80%;
-    padding-left: 2rem
+    padding-left: 1.5rem
+  }
+
+  .details img{
+    margin-right: 1.5rem;
   }
 }
